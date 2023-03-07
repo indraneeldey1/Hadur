@@ -5,6 +5,8 @@ A CI/CD pipeline system built to work with native K8S system while working on a 
 
 ## Documentation
  - Draw.IO / Diagrams.Net : To view diagrams / UML Charts
+ - Kubernetes
+ - Docker
 
 # Architecture
 

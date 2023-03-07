@@ -4,3 +4,6 @@
 *.bkp
 
 *.dtmp
+
+*/obj/
+*/bin/
