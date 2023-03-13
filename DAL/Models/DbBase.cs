@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Hadur.DAL.Database;
 
 namespace DAL.Models;
 
@@ -12,11 +13,11 @@ public abstract class DbBase
     
     [ForeignKey("CreatedBy")]
     public int CreatedById { get; set; }
-    public UsersDb CreatedBy { get; set; }
+    public UsersDbModel CreatedBy { get; set; }
     
     public DateTime? UpdatedLast { get; set; } = null;
     
     [ForeignKey("ModifiedBy")]
     public int UpdatedById { get; set; }
-    public UsersDb UpdatedBy { get; set; }
+    public UsersDbModel UpdatedBy { get; set; }
 }

@@ -1,12 +1,13 @@
 ﻿using System.Reflection;
 using DAL.Models;
+using Hadur.DAL.Database;
 using Microsoft.EntityFrameworkCore;
 
 namespace DAL;
 
 public class HadurContext: DbContext
 {
-    public DbSet<UsersDb> Users { get; set; }
+    public DbSet<UsersDbModel> Users { get; set; }
     
     public HadurContext(DbContextOptions<HadurContext> options): base(options)
     {
