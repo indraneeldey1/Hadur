@@ -15,9 +15,9 @@ public abstract class RepoBase<TEntity> : IRepoBase<TEntity> where TEntity : DbB
 {
     private readonly HadurContext Context;
     protected ILogger<RepoBase<TEntity>> _logger;
-    private readonly IDatabase _redis;
+    private protected IDatabase CacheDb;
 
-    public string RedisKey = String.Empty;
+    private string RedisKey { get; set; } = String.Empty;
 
     private DbSet<TEntity> Set { get; }
 
@@ -27,9 +27,11 @@ public abstract class RepoBase<TEntity> : IRepoBase<TEntity> where TEntity : DbB
         Context = context.CreateDbContext();
         Set = Context.Set<TEntity>();
         _logger = logger;
-        _redis = redis.GetDatabase();
+        CacheDb = redis.GetDatabase();
     }
 
+    public void SetRedisKey(string key) => RedisKey = key;
+    
     public virtual (TEntity? entity, bool success) Create(TEntity? model)
     {
         try
@@ -54,10 +56,10 @@ public abstract class RepoBase<TEntity> : IRepoBase<TEntity> where TEntity : DbB
     {
         try
         {
-            if (!_redis.KeyExists($"{RedisKey}:{id}"))
+            if (!CacheDb.KeyExists($"{RedisKey}:{id}"))
                 return id <= 0 ? (entity: null, sucess: false) : (entity: Set.First(o => o.Id == id), sucess: true);
             
-            TEntity model = _redis.HashGetAll($"{RedisKey}:{id}").ToObject<TEntity>();
+            TEntity model = CacheDb.HashGetAll($"{RedisKey}:{id}").ToObject<TEntity>();
             return (entity: model, sucess: true);
         }
         catch (Exception e)

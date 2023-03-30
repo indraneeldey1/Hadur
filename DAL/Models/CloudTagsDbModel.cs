@@ -15,10 +15,15 @@ public class CloudTagsDbModel : DbBase
 
 public class CloudTagRepo : RepoBase<CloudTagsDbModel>
 {
-  private readonly ILogger<RepoBase<CloudTagsDbModel>> _logger;
-
+ 
   public CloudTagRepo(ILogger<RepoBase<CloudTagsDbModel>> logger, IDbContextFactory<HadurContext> context, IConnectionMultiplexer redis) : base(logger, context, redis)
   {
-    _logger = logger;
+   
+    SetRedisKey("cloudtags");
   }
+
+  public IEnumerable<CloudTagsDbModel> AutoCompleteTags(string tag) =>
+    //TODO: add in search auto complete against caching
+    new List<CloudTagsDbModel>();
+  
 }

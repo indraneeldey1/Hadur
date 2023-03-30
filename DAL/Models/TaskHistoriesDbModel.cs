@@ -1,5 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
+using DAL;
 using DAL.Models;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
+using StackExchange.Redis;
 
 namespace Hadur.DAL.Database;
 
@@ -21,4 +25,11 @@ public class TaskHistoriesDbModel : DbBase
   public string Data { get; set; } = "";
 
   public int JobHistoryId { get; set; }
+}
+
+public class TaskHistoriesRepo : RepoBase<TaskHistoriesDbModel>
+{
+  public TaskHistoriesRepo(ILogger<RepoBase<TaskHistoriesDbModel>> logger, IDbContextFactory<HadurContext> context, IConnectionMultiplexer redis) : base(logger, context, redis)
+  {
+  }
 }

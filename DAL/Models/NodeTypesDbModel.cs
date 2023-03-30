@@ -1,5 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
+using DAL;
 using DAL.Models;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
+using StackExchange.Redis;
 
 namespace Hadur.DAL.Database;
 
@@ -24,4 +28,12 @@ public class NodeTypesDbModel : DbBase
   public int[] ConfigurationIds { get; set; } = new int[]{};
   
   public ICollection<ConfigurationDbModel> Configurations { get; set; }
+}
+
+public class NodeTypesRepo : RepoBase<NodeTypesDbModel>
+{
+  public NodeTypesRepo(ILogger<RepoBase<NodeTypesDbModel>> logger, IDbContextFactory<HadurContext> context, IConnectionMultiplexer redis) : base(logger, context, redis)
+  {
+    SetRedisKey("node:types");
+  }
 }
