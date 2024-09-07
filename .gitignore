@@ -5,5 +5,5 @@
 
 *.dtmp
 
-*/obj/
-*/bin/
+**/obj/
+**/bin/
