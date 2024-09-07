@@ -1,17 +1,14 @@
 ﻿using System.Linq.Expressions;
 using System.Runtime.InteropServices;
 using Common;
+using DAL.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using StackExchange.Redis;
 
-namespace DAL.Models;
+namespace DAL.Repos;
 
-public interface IRepoBase<T>
-{
-}
-
-public abstract class RepoBase<TEntity> : IRepoBase<TEntity> where TEntity : DbBase
+public class RepoBase<TEntity> where TEntity : DbBase
 {
     private readonly HadurContext Context;
     protected ILogger<RepoBase<TEntity>> _logger;

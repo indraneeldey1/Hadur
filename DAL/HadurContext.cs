@@ -1,6 +1,5 @@
 ﻿using System.Reflection;
 using DAL.Models;
-using Hadur.DAL.Database;
 using Microsoft.EntityFrameworkCore;
 
 namespace DAL;

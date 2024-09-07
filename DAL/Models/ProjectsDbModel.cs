@@ -1,11 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
-using DAL;
-using DAL.Models;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
-using StackExchange.Redis;
 
-namespace Hadur.DAL.Database;
+namespace DAL.Models;
 [Table("Projects")]
 public  class ProjectsDbModel: DbBase
 {
@@ -17,11 +12,4 @@ public  class ProjectsDbModel: DbBase
 
   public int[] JobsIds { get; set; } = new int[] { };
   public ICollection<JobsDbModel> Jobs { get; set; }
-}
-
-public class ProjectsRepo : RepoBase<ProjectsDbModel>
-{
-  public ProjectsRepo(ILogger<RepoBase<ProjectsDbModel>> logger, IDbContextFactory<HadurContext> context, IConnectionMultiplexer redis) : base(logger, context, redis)
-  {
-  }
 }

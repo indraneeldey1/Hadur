@@ -1,7 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
-using DAL.Models;
 
-namespace Hadur.DAL.Database;
+namespace DAL.Models;
 [Table("Pipelines")]
 public class PipelinesDbModel: DbBase
 {
